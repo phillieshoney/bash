@@ -1,0 +1,29 @@
+# 配列について
+
+# 定義
+ARRAY1=()
+
+# 値を指定して定義
+ARRAY2=("history" "japanese" "math")
+
+# 値を追加
+ARRAY1=("${ARRAY1[@]}" "give")
+ARRAY1=("${ARRAY1[@]}" "gave")
+ARRAY1=("${ARRAY1[@]}" "given")
+
+# インデックスを指定して値を追加
+ARRAY2[3]="english"
+ARRAY2[4]="science"
+
+
+# 値を取得
+echo ${ARRAY1[0]} => give
+echo ${ARRAY1[1]} => gave
+echo ${ARRAY1[2]} => given
+
+
+# すべてのインデックスに対して処理
+for (( I = 0; I < ${ARRAY1[@]}; ++I ))
+do
+	echo ${ARRAY1[I]}
+done
