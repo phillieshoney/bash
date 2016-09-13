@@ -1,0 +1,21 @@
+# ヒヤドキュメントで同じinsert文を2回流す(pkでエラーになる)
+mysql -uroot test <<EOF
+begin;
+source insert.sql
+source insert.sql
+commit;
+EOF
+
+# こうゆうエラーのとり方ができるのかわからんけど
+rc=$?
+if [ $rc -ne 0 ]; then
+  echo "SQL Error."
+  exit 1
+fi
+
+
+# 上記を流したら、トランザクションが効いて
+# ヒヤドキュメント内のSQLはロールバックされる
+$ mysql -uroot test
+mysql> select * from t;
+Empty set (0.00 sec)
